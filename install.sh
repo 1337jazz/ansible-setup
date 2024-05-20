@@ -1,5 +1,5 @@
 #!/bin/bash
 
 # Just runs the ansible playbook
-ansible-playbook playbook.yml
+sudo ansible-playbook playbook.yml
 

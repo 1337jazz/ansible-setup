@@ -4,11 +4,6 @@
     - name: vault_password
       prompt: "Enter Ansible Vault password"
       private: yes
-    - name: sudo_password
-      prompt: "Enter sudo password"
-      private: yes
-  vars:
-    ansible_become_pass: "{{ sudo_password }}"
   tasks:
     - name: Install packages
       become: yes
