@@ -22,21 +22,21 @@
 
     - name: Create .ssh directory
       file:
-        path: "/home/{{ ansible.env.USER }}"
+        path: "/home/{{ ansible_env.USER }}"
         state: directory
         mode: "0600"
 
     - name: Copy encrypted ssh keys
       copy:
         src: "encrypted/ssh/id_ed25519"
-        dest: "/home/{{ ansible.env.USER }}/.ssh/id_ed25519"
+        dest: "/home/{{ ansible_env.USER }}/.ssh/id_ed25519"
         vars_prompt:
           - name: vault_password
             prompt: "Enter Ansible Vault password"
             private: yes
 
     - name: Decrypt the private key
-      shell: "ansible-vault decrypt /home/{{ ansible.env.USER }}/.ssh/id_ed25519 --vault-password-file=/tmp/vault_pass.txt"
+      shell: "ansible-vault decrypt /home/{{ ansible_env.USER }}/.ssh/id_ed25519 --vault-password-file=/tmp/vault_pass.txt"
       vars:
         vault_pass_file: "/tmp/vault_pass.txt"
       environment:
@@ -53,4 +53,4 @@
     - name: Copy public ssh key
       copy:
         src: "public/ssh/id_ed25519.pub"
-        dest: "/home/{{ ansible.env.USER }}/.ssh/id_ed25519.pub"
+        dest: "/home/{{ ansible_env.USER }}/.ssh/id_ed25519.pub"
