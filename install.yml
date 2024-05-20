@@ -1,0 +1,26 @@
+---
+- hosts: localhost
+  become: yes
+  tasks:
+    - name: Install packages
+      apt:
+        name:
+        - i3
+        - openssh-server
+        - stow
+        - git
+        - neovim
+        - zsh
+        state: present
+    - name: Start ssh service
+      service:
+        name: ssh
+        state: started
+        enabled: yes
+    - name: Create .ssh directory
+      file:
+        path: /home/jazz/.ssh
+        state: directory
+        owner: jazz
+        group: jazz
+        mode: 0600
