@@ -11,12 +11,14 @@
         - git
         - neovim
         - zsh
-        state: present
+      state: present
+
     - name: Start ssh service
       service:
         name: ssh
         state: started
         enabled: yes
+
     - name: Create .ssh directory
       file:
         path: /home/jazz/.ssh
@@ -24,3 +26,33 @@
         owner: jazz
         group: jazz
         mode: 0600
+
+    - name: Copy encrypted ssh keys
+      copy:
+        src: encrypted/ssh/id_ed25519
+        dest: /home/jazz/.ssh/id_ed25519
+      vars_prompt:
+        - name: vault_password
+          prompt: "Enter Ansible Vault password"
+          private: yes
+
+    - name: Decrypt the private key
+      shell: "ansible-vault decrypt /home/jazz/.ssh/id_ed25519 --vault-password-file=/tmp/vault_pass.txt"
+      vars:
+        vault_pass_file: "/tmp/vault_pass.txt"
+      environment:
+        VAULT_PASSWORD_FILE: "{{ vault_pass_file }}"
+      register: decrypt_result
+      no_log: true
+
+    - name: Remove the vault password file
+      file:
+        path: "{{ vault_pass_file }}"
+        state: absent
+      when: decrypt_result is succeeded
+
+    - name: Copy public ssh key
+      copy:
+        src: public/ssh/id_ed25519.pub
+        dest: /home/jazz/.ssh/id_ed25519.pub
+     
