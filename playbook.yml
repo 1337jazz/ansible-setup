@@ -1,12 +1,12 @@
 ---
 - hosts: localhost
+  vars_prompt:
+    - name: sudo_password
+      prompt: "Enter sudo password"
+      private: yes
   tasks:
     - name: Install packages
       become: yes
-      vars_prompt:
-          - name: sudo_password
-            prompt: "Enter sudo password"
-            private: yes
       apt:
         name:
           - i3
