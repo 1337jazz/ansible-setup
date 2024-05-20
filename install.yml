@@ -31,10 +31,10 @@
       copy:
         src: encrypted/ssh/id_ed25519
         dest: /home/jazz/.ssh/id_ed25519
-      vars_prompt:
-        - name: vault_password
-          prompt: "Enter Ansible Vault password"
-          private: yes
+        vars_prompt:
+          - name: vault_password
+            prompt: "Enter Ansible Vault password"
+            private: yes
 
     - name: Decrypt the private key
       shell: "ansible-vault decrypt /home/jazz/.ssh/id_ed25519 --vault-password-file=/tmp/vault_pass.txt"
