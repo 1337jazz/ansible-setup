@@ -25,6 +25,7 @@
         enabled: yes
 
     - name: Create .ssh directory
+      become: no
       file:
         path: "/home/{{ ansible_env.USER }}"
         state: directory
@@ -45,6 +46,7 @@
         mode: "0600"
 
     - name: Decrypt the private key
+      become: no
       shell: "ansible-vault decrypt /home/{{ ansible_env.USER }}/.ssh/id_ed25519 --vault-password-file=/tmp/vault_pass.txt --output=/home/{{ ansible_env.USER }}/.ssh/id_ed25519"
       vars:
         vault_pass_file: "/tmp/vault_pass.txt"
@@ -53,12 +55,14 @@
       register: decrypt_result
 
     - name: Remove the vault password file
+      become: no
       file:
         path: "{{ vault_pass_file }}"
         state: absent
       when: decrypt_result is succeeded
 
     - name: Copy public ssh key
+      become: no
       copy:
         src: "public/ssh/id_ed25519.pub"
         dest: "/home/{{ ansible_env.USER }}/.ssh/id_ed25519.pub"
