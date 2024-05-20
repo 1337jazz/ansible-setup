@@ -44,7 +44,6 @@
       environment:
         VAULT_PASSWORD_FILE: "{{ vault_pass_file }}"
       register: decrypt_result
-      no_log: true
 
     - name: Remove the vault password file
       file:
