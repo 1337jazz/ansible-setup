@@ -24,8 +24,6 @@
       file:
         path: "/home/{{ ansible.env.USER }}"
         state: directory
-        owner: "{{ ansible.env.USER }}"
-        group: "{{ ansible.env.USER }}"
         mode: "0600"
 
     - name: Copy encrypted ssh keys
