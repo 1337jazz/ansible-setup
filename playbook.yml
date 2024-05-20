@@ -4,6 +4,11 @@
     - name: vault_password
       prompt: "Enter Ansible Vault password"
       private: yes
+    - name: sudo_password
+      prompt: "Enter sudo password"
+      private: yes
+  vars:
+    ansible_become_pass: "{{ sudo_password }}"
   tasks:
     - name: Install packages
       become: yes
@@ -25,7 +30,6 @@
         enabled: yes
 
     - name: Create .ssh directory
-      become: no
       file:
         path: "/home/{{ ansible_env.USER }}"
         state: directory
@@ -39,14 +43,12 @@
     #     dest: "/home/{{ ansible_env.USER }}/.ssh/id_ed25519"
         
     - name: Create temporary vault password file
-      become: no 
       copy:
         content: "{{ vault_password }}"
         dest: /tmp/vault_pass.txt
         mode: "0600"
 
     - name: Decrypt the private key
-      become: no
       shell: "ansible-vault decrypt /home/{{ ansible_env.USER }}/.ssh/id_ed25519 --vault-password-file=/tmp/vault_pass.txt --output=/home/{{ ansible_env.USER }}/.ssh/id_ed25519"
       vars:
         vault_pass_file: "/tmp/vault_pass.txt"
@@ -55,14 +57,12 @@
       register: decrypt_result
 
     - name: Remove the vault password file
-      become: no
       file:
         path: "{{ vault_pass_file }}"
         state: absent
       when: decrypt_result is succeeded
 
     - name: Copy public ssh key
-      become: no
       copy:
         src: "public/ssh/id_ed25519.pub"
         dest: "/home/{{ ansible_env.USER }}/.ssh/id_ed25519.pub"
