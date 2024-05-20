@@ -1,8 +1,8 @@
 ---
 - hosts: localhost
-  become: yes
   tasks:
     - name: Install packages
+      become: yes
       apt:
         name:
         - i3
@@ -21,23 +21,23 @@
 
     - name: Create .ssh directory
       file:
-        path: /home/jazz/.ssh
+        path: /home/{{ ansible_user_id }}/.ssh
         state: directory
-        owner: jazz
-        group: jazz
+        owner: {{ ansible_user_id }} 
+        group: {{ ansible_user_id }} 
         mode: 0600
 
     - name: Copy encrypted ssh keys
       copy:
         src: encrypted/ssh/id_ed25519
-        dest: /home/jazz/.ssh/id_ed25519
+        dest: /home/{{ ansible_user_id }}/.ssh/id_ed25519
         vars_prompt:
           - name: vault_password
             prompt: "Enter Ansible Vault password"
             private: yes
 
     - name: Decrypt the private key
-      shell: "ansible-vault decrypt /home/jazz/.ssh/id_ed25519 --vault-password-file=/tmp/vault_pass.txt"
+      shell: "ansible-vault decrypt /home/{{ ansible_user_id }}/.ssh/id_ed25519 --vault-password-file=/tmp/vault_pass.txt"
       vars:
         vault_pass_file: "/tmp/vault_pass.txt"
       environment:
@@ -54,5 +54,5 @@
     - name: Copy public ssh key
       copy:
         src: public/ssh/id_ed25519.pub
-        dest: /home/jazz/.ssh/id_ed25519.pub
+        dest: /home/{{ ansible_user_id }}/.ssh/id_ed25519.pub
      
