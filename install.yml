@@ -11,7 +11,7 @@
         - git
         - neovim
         - zsh
-      state: present
+        state: present
 
     - name: Start ssh service
       service:
