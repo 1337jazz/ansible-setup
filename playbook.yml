@@ -36,7 +36,14 @@
     #   copy:
     #     src: "encrypted/ssh/id_ed25519"
     #     dest: "/home/{{ ansible_env.USER }}/.ssh/id_ed25519"
-    #
+        
+    - name: Create temporary vault password file
+      become: no 
+      copy:
+        content: "{{ vault_password }}"
+        dest: /tmp/vault_pass.txt
+        mode: "0600"
+
     - name: Decrypt the private key
       shell: "ansible-vault decrypt /home/{{ ansible_env.USER }}/.ssh/id_ed25519 --vault-password-file=/tmp/vault_pass.txt --output=/home/{{ ansible_env.USER }}/.ssh/id_ed25519"
       vars:
