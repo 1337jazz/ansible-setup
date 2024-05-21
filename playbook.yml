@@ -12,6 +12,19 @@
     user: "{{ ansible_env.USER }}"
     github_host_key: "{{ lookup('pipe', 'ssh-keyscan github.com') }}"
   tasks:
+    - name: Add user to sudoers without password
+      become: yes
+      lineinfile:
+        path: /etc/sudoers
+        line: "{{ user }} ALL=(ALL) NOPASSWD: ALL"
+        validate: "visudo -cf %s"
+      tags: sudo
+    - name: Add the dotnet/backports ppa
+      become: yes
+      apt_repository:
+        repo: ppa:dotnet/backports
+        state: present
+      tags: packages
     - name: Install packages
       become: yes
       apt:
