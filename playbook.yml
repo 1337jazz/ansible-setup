@@ -2,7 +2,7 @@
 - hosts: localhost
   vars_prompt:
     - name: vault_password
-      prompt: "Enter Ansible Vault password"
+      prompt: "Enter Ansible Vault password (only required the first time):"
       private: yes
   vars:
     user: "{{ ansible_env.USER }}"
@@ -112,6 +112,14 @@
       shell: "curl -sSf https://downloads.nordcdn.com/apps/linux/install.sh | sh"
       when: not nordvpn.stat.exists
       tags: nordvpn
+
+    - name: Build batsignal
+      shell: |
+        git clone https://github.com/electrickite/batsignal.git /tmp/batsignal
+        cd /tmp/batsignal
+        make
+        sudo make install
+      tags: batsignal
       
     - name: Start ssh service
       become: yes
