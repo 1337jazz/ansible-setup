@@ -1,5 +1,5 @@
 #!/bin/bash
 
-# Just runs the ansible playbook
+sudo apt install ansible -y
 ansible-playbook playbook.yml
 

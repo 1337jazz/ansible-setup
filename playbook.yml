@@ -173,13 +173,6 @@
       when: not dotfiles.stat.exists
       tags: dotfiles
 
-    - name: Remove default .zshrc
-      become: yes
-      file:
-        path: "/home/{{ user }}/.zshrc"
-        state: absent
-      tags: zsh
-
     - name: Set zsh as default shell
       become: yes
       shell: "chsh -s $(which zsh) {{ user }}"
@@ -190,11 +183,18 @@
         path: "/home/{{ user }}/.oh-my-zsh"
       register: oh_my_zsh
       tags: zsh
-
       register: oh_my_zsh
+
     - name: Install oh-my-zsh
       shell: sh -c "$(curl -fsSL https://install.ohmyz.sh/)"
       when: not oh_my_zsh.stat.exists
+      tags: zsh
+
+    - name: Remove default .zshrc
+      become: yes
+      file:
+        path: "/home/{{ user }}/.zshrc"
+        state: absent
       tags: zsh
 
     - name: Ensure the font directory exists
