@@ -4,11 +4,11 @@
     - name: vault_password
       prompt: "Enter Ansible Vault password"
       private: yes
-    - name: sudo_password
-      prompt: "Enter sudo password"
-      private: yes
+    # - name: sudo_password
+    #   prompt: "Enter sudo password"
+    #   private: yes
   vars:
-    ansible_become_pass: "{{ sudo_password }}"
+    # ansible_become_pass: "{{ sudo_password }}"
     user: "{{ ansible_env.USER }}"
     github_host_key: "{{ lookup('pipe', 'ssh-keyscan github.com') }}"
   tasks:
