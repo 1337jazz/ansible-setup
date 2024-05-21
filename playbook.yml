@@ -71,7 +71,7 @@
           - plocate
           - xclip
           - flameshot
-          - docker
+          - docker-ce
           - redshift
         state: present
       tags: packages
