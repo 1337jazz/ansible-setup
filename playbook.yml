@@ -82,7 +82,5 @@
       shell: "chsh -s $(which zsh)"
 
     - name: Install oh-my-zsh
-      become: yes
       shell: sh -c "$(curl -fsSL https://install.ohmyz.sh/)"
-      when: not (ansible_user_dir | search('oh-my-zsh'))
       tags: test
