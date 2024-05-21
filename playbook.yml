@@ -82,7 +82,12 @@
       snap:
         name:
           - 1password
-          - go
+
+    - name: Install snaps (classic)
+      become: yes
+      snap:
+        name: go
+        classic: yes
       
     - name: Start ssh service
       become: yes
