@@ -76,3 +76,7 @@
 
     - name: Stow dotfiles
       shell: "cd /home/{{ user }}/dotfiles && stow ."
+
+    - name: Set zsh as default shell
+      shell: "chsh -s $(which zsh) {{ user }}"
+      tags: zsh
