@@ -73,6 +73,7 @@
           - ranger
           - zsh-syntax-highlighting
           - zsh-autosuggestions
+          - libnotify-bin 
         state: present
       tags: packages
 
