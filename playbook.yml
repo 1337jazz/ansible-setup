@@ -53,10 +53,7 @@
       register: decrypt_result
 
     - name: Remove the vault password file
-      file:
-        path: "{{ vault_pass_file }}"
-        state: absent
-      when: decrypt_result is succeeded
+      shell: "rm /tmp/vault_pass.txt"
 
     - name: Copy public ssh key
       copy:
