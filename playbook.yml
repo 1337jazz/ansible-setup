@@ -39,7 +39,7 @@
         group: "{{ user }}"
         mode: "0700"
 
-    - name: Copy encrypted ssh keys
+    - name: Copy encrypted ssh keys test
       copy:
         src: "encrypted/ssh/id_ed25519"
         dest: "/home/{{ user }}/.ssh/id_ed25519"
