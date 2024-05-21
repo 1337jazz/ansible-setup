@@ -196,16 +196,16 @@
       when: not oh_my_zsh.stat.exists
       tags: zsh
 
-    - name: Check if zsh-syntax-highlighting is installed
+    - name: Check if zsh autosuggestions installed
       stat:
-        path: "/home/{{ user }}/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting"
+        path: "/home/{{ user }}/.oh-my-zsh/custom/plugins/zsh-autosuggestions"
       register: zsh_syntax_highlighting
       tags: zsh
 
     - name: Clone zsh-auto-suggestions
       shell: "git clone https://github.com/zsh-users/zsh-autosuggestions ~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions"
       when: not zsh_syntax_highlighting.stat.exists
-      tags: zsh-test
+      tags: zsh
     
     - name: Ensure the font directory exists
       become: yes
