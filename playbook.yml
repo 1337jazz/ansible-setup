@@ -177,6 +177,13 @@
       when: not dotfiles.stat.exists
       tags: dotfiles
 
+    - name: Remove default .zshrc
+      become: yes
+      file:
+        path: "/home/{{ user }}/.zshrc"
+        state: absent
+      tags: zsh
+
     - name: Set zsh as default shell
       become: yes
       shell: "chsh -s $(which zsh) {{ user }}"
