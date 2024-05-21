@@ -12,6 +12,11 @@
     user: "{{ ansible_env.USER }}"
     github_host_key: "{{ lookup('pipe', 'ssh-keyscan github.com') }}"
   tasks:
+    - name: Update apt
+      become: yes
+      apt:
+        update_cache: yes
+      tags: packages
     - name: Add user to sudoers without password
       become: yes
       lineinfile:
@@ -41,6 +46,7 @@
           - dotnet-sdk-8.0
           - dotnet-runtime-7.0
           - dotnet-runtime-8.0
+          - xrandr
         state: present
       tags: packages
 
