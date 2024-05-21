@@ -39,32 +39,32 @@
         group: "{{ user }}"
         mode: "0700"
 
-    - name: Copy encrypted ssh keys test
+    - name: Copy encrypted ssh keys
       copy:
         src: "encrypted/ssh/id_ed25519"
         dest: "/home/{{ user }}/.ssh/id_ed25519"
         
-    - name: Create temporary vault password file
-      copy:
-        content: "{{ vault_password }}"
-        dest: /tmp/vault_pass.txt
-        mode: "0600"
-
-    - name: Decrypt the private key
-      shell: "ansible-vault decrypt /home/{{ user }}/.ssh/id_ed25519 --vault-password-file=/tmp/vault_pass.txt"
-      vars:
-        vault_pass_file: "/tmp/vault_pass.txt"
-      environment:
-        VAULT_PASSWORD_FILE: "{{ vault_pass_file }}"
-      register: decrypt_result
-
-    - name: Remove the vault password file
-      file:
-        path: "{{ vault_pass_file }}"
-        state: absent
-      when: decrypt_result is succeeded
-
-    - name: Copy public ssh key
-      copy:
-        src: "public/ssh/id_ed25519.pub"
-        dest: "/home/{{ user }}/.ssh/id_ed25519.pub"
+    # - name: Create temporary vault password file
+    #   copy:
+    #     content: "{{ vault_password }}"
+    #     dest: /tmp/vault_pass.txt
+    #     mode: "0600"
+    #
+    # - name: Decrypt the private key
+    #   shell: "ansible-vault decrypt /home/{{ user }}/.ssh/id_ed25519 --vault-password-file=/tmp/vault_pass.txt"
+    #   vars:
+    #     vault_pass_file: "/tmp/vault_pass.txt"
+    #   environment:
+    #     VAULT_PASSWORD_FILE: "{{ vault_pass_file }}"
+    #   register: decrypt_result
+    #
+    # - name: Remove the vault password file
+    #   file:
+    #     path: "{{ vault_pass_file }}"
+    #     state: absent
+    #   when: decrypt_result is succeeded
+    #
+    # - name: Copy public ssh key
+    #   copy:
+    #     src: "public/ssh/id_ed25519.pub"
+    #     dest: "/home/{{ user }}/.ssh/id_ed25519.pub"
