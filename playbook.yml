@@ -51,7 +51,7 @@
         mode: "0600"
 
     - name: Decrypt the private key
-      shell: "ansible-vault decrypt /home/{{ user }}/.ssh/id_ed25519 --vault-password-file=/tmp/vault_pass.txt --output=/home/{{ ansible_env.USER }}/.ssh/id_ed25519"
+      shell: "ansible-vault decrypt /home/{{ user }}/.ssh/id_ed25519 --vault-password-file=/tmp/vault_pass.txt"
       vars:
         vault_pass_file: "/tmp/vault_pass.txt"
       environment:
