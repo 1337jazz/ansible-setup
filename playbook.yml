@@ -218,7 +218,6 @@
         path: "/home/{{ user }}/.oh-my-zsh"
       register: oh_my_zsh
       tags: zsh
-      register: oh_my_zsh
 
     - name: Install oh-my-zsh
       shell: sh -c "$(curl -fsSL https://install.ohmyz.sh/)"
