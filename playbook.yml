@@ -178,6 +178,7 @@
       tags: dotfiles
 
     - name: Set zsh as default shell
+      become: yes
       shell: "chsh -s $(which zsh) {{ user }}"
       tags: zsh
 
