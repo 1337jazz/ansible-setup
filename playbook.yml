@@ -70,6 +70,7 @@
           - docker-ce
           - redshift
           - pamixer
+          - ranger
         state: present
       tags: packages
 
@@ -177,7 +178,6 @@
       tags: dotfiles
 
     - name: Set zsh as default shell
-      become: yes
       shell: "chsh -s $(which zsh)"
       tags: zsh
 
