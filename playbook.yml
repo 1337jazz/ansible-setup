@@ -82,8 +82,16 @@
     - name: Set zsh as default shell
       become: yes
       shell: "chsh -s $(which zsh)"
+      when: ansible_shell_type != "zsh"
+      tags: zsh
 
+    - name: Check if oh-my-zsh is installed
+      stat:
+        path: "/home/{{ user }}/.oh-my-zsh"
+      tags: test
+
+      register: oh_my_zsh
     - name: Install oh-my-zsh
       shell: sh -c "$(curl -fsSL https://install.ohmyz.sh/)"
-      when: not stat("/home/{{ user }}/.oh-my-zsh").exists
-      tags: test
+      when: oh_my_zsh.stat.exists == False
+      tags: zsh
