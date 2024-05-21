@@ -109,7 +109,8 @@
 
     - name: Install nordvpn
       become: yes
-      shell: "curl -sSf https://downloads.nordcdn.com/apps/linux/install.sh"
+      shell: "curl -sSf https://downloads.nordcdn.com/apps/linux/install.sh | sh"
+      when: not nordvpn.stat.exists
       tags: nordvpn
       
     - name: Start ssh service
