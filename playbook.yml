@@ -67,23 +67,19 @@
         content: "{{ vault_password }}"
         dest: /tmp/vault_pass.txt
         mode: "0600"
+      when: not ssh_key.stat.exists
       tags: ssh
 
     - name: Decrypt the private key
       shell: "ansible-vault decrypt /home/{{ user }}/.ssh/id_ed25519 --vault-password-file=/tmp/vault_pass.txt"
       register: decrypt_result
+      when: not ssh_key.stat.exists
       tags: ssh
 
     - name: Remove the vault password file
       shell: "rm /tmp/vault_pass.txt"
+      when: not ssh_key.stat.exists
       tags: ssh
-
-    - name: Clone dotfiles repository
-      git:
-        repo: "git@github.com:1337jazz/dotfiles.git"
-        accept_hostkey: yes
-        dest: "/home/{{ user }}/dotfiles"
-      tags: dotfiles
 
     - name: Check dotfiles exists
       stat:
@@ -91,9 +87,17 @@
       register: dotfiles
       tags: dotfiles
 
+    - name: Clone dotfiles repository
+      git:
+        repo: "git@github.com:1337jazz/dotfiles.git"
+        accept_hostkey: yes
+        dest: "/home/{{ user }}/dotfiles"
+      when: not dotfiles.stat.exists
+      tags: dotfiles
+
     - name: Stow dotfiles
       shell: "cd /home/{{ user }}/dotfiles && stow ."
-      when: dotfiles.stat.exists
+      when: not dotfiles.stat.exists
       tags: dotfiles
 
     - name: Set zsh as default shell
