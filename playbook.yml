@@ -96,14 +96,15 @@
         name:
           - 1password
           - slack
-          - node
       tags: snaps
 
     - name: Install snaps (classic)
       become: yes
       snap:
-        name: go
         classic: yes
+        name: 
+          - go
+          - node
       tags: snaps
 
     - name: Check nordvpn exists
