@@ -51,6 +51,12 @@
         dest: "/home/{{ user }}/.ssh/id_ed25519.pub"
       tags: ssh
 
+    - name: Check ssh key exists
+      stat:
+        path: "/home/{{ user }}/.ssh/id_ed25519"
+      register: ssh_key
+      tags: ssh
+      
     - name: Copy encrypted ssh keys
       shell: "cat encrypted/ssh/id_ed25519 > /home/{{ user }}/.ssh/id_ed25519"
       when: not ssh_key.stat.exists
