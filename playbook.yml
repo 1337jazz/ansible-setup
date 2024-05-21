@@ -90,6 +90,14 @@
         enabled: yes
       tags: ssh
 
+    - name: Enable docker service
+      become: yes
+      service:
+        name: docker
+        state: started
+        enabled: yes
+      tags: docker
+
     - name: Create .ssh directory
       become: yes
       file:
