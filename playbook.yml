@@ -62,5 +62,5 @@
 
     - name: Clone dotfiles repository
       git:
-        repo: "git@github.com/1337jazz/dotfiles.git"
+        repo: "git@github.com:1337jazz/dotfiles.git"
         dest: "/home/{{ user }}/dotfiles"
