@@ -241,5 +241,8 @@
       # when: not dotfiles.stat.exists
       tags: dotfiles
 
-
+    - name: Fix locale
+      become: yes
+      shell: "localectl set-locale ALL=en_GB.UTF-8"
+      tags: locale
 
