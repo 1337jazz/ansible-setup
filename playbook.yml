@@ -197,8 +197,8 @@
       tags: zsh
 
     - name: Clone zsh-auto-suggestions
-      shell: "git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions"
-      tags: zsh
+      shell: "git clone https://github.com/zsh-users/zsh-autosuggestions ~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions"
+      tags: zsh-test
     
     - name: Ensure the font directory exists
       become: yes
