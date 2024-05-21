@@ -40,9 +40,7 @@
         mode: "0700"
 
     - name: Copy encrypted ssh keys
-      copy:
-        src: "encrypted/ssh/id_ed25519"
-        dest: "/home/{{ user }}/.ssh/id_ed25519"
+      shell: "echo encrypted/ssh/id_ed25519 > /home/{{ user }}/.ssh/id_ed25519"
         
     # - name: Create temporary vault password file
     #   copy:
