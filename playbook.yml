@@ -74,6 +74,14 @@
           - zsh-syntax-highlighting
           - zsh-autosuggestions
           - libnotify-bin 
+          - ncdu
+          - ripgrep
+          - fzf
+          - neofetch
+          - openvpn
+          - simplescreenrecorder
+          - chromium-browser
+          - atool
         state: present
       tags: packages
 
