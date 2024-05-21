@@ -69,6 +69,7 @@
           - flameshot
           - docker-ce
           - redshift
+          - pamixer
         state: present
       tags: packages
 
