@@ -22,6 +22,8 @@
           - git
           - neovim
           - zsh
+          - curl
+          - clang
         state: present
 
     - name: Start ssh service
@@ -83,4 +85,5 @@
 
     - name: Install oh-my-zsh
       shell: sh -c "$(curl -fsSL https://install.ohmyz.sh/)"
+      when: not stat("/home/{{ user }}/.oh-my-zsh").exists
       tags: test
