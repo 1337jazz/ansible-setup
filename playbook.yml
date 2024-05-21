@@ -4,11 +4,7 @@
     - name: vault_password
       prompt: "Enter Ansible Vault password"
       private: yes
-    # - name: sudo_password
-    #   prompt: "Enter sudo password"
-    #   private: yes
   vars:
-    # ansible_become_pass: "{{ sudo_password }}"
     user: "{{ ansible_env.USER }}"
     github_host_key: "{{ lookup('pipe', 'ssh-keyscan github.com') }}"
   tasks:
@@ -96,6 +92,14 @@
         name: docker
         state: started
         enabled: yes
+      tags: docker
+
+    - name: Add user to docker group
+      become: yes
+      user:
+        name: "{{ user }}"
+        groups: docker
+        append: yes
       tags: docker
 
     - name: Create .ssh directory
