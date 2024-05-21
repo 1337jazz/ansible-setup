@@ -202,9 +202,9 @@
         mode: '0755'
       tags: fonts
 
-    - name: Check if JetBrains Mono Nerd Font is already installed
+    - name: Check required fonts
       stat:
-        path: /usr/local/share/fonts/nerd-fonts/JetBrains Mono Regular Nerd Font Complete.ttf
+        path: /usr/local/share/fonts/nerd-fonts/JetBrainsMonoNerdFont-Regular.ttf
       register: font_installed
       tags: fonts
 
