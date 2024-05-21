@@ -32,17 +32,17 @@
         state: present
       tags: packages
 
-    - name: Add docker ppa
-      become: yes
-      apt_repository:
-        repo: deb [arch=amd64] https://download.docker.com/linux/ubuntu focal stable
-        state: present
-      tags: packages
-
     - name: Add docker gpg key
       become: yes
       apt_key:
         url: https://download.docker.com/linux/ubuntu/gpg
+        state: present
+      tags: packages
+
+    - name: Add docker ppa
+      become: yes
+      apt_repository:
+        repo: deb https://download.docker.com/linux/ubuntu focal stable
         state: present
       tags: packages
 
