@@ -83,6 +83,9 @@
           - chromium-browser
           - atool
           - make
+          - dnsutils
+          - nmap
+          - htop
         state: present
       tags: packages
 
@@ -97,6 +100,17 @@
       snap:
         name: go
         classic: yes
+
+    - name: Check nordvpn exists
+      stat:
+        path: /usr/bin/nordvpn
+      register: nordvpn
+      tags: nordvpn
+
+    - name: Install nordvpn
+      become: yes
+      shell: "curl -sSf https://downloads.nordcdn.com/apps/linux/install.sh"
+      tags: nordvpn
       
     - name: Start ssh service
       become: yes
