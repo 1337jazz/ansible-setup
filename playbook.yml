@@ -46,7 +46,7 @@
           - dotnet-sdk-8.0
           - dotnet-runtime-7.0
           - dotnet-runtime-8.0
-          - xrandr
+          - arandr
         state: present
       tags: packages
 
