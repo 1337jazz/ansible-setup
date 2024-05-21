@@ -24,12 +24,28 @@
         line: "{{ user }} ALL=(ALL) NOPASSWD: ALL"
         validate: "visudo -cf %s"
       tags: sudo
-    - name: Add the dotnet/backports ppa
+
+    - name: Add dotnet/backports ppa
       become: yes
       apt_repository:
         repo: ppa:dotnet/backports
         state: present
       tags: packages
+
+    - name: Add docker ppa
+      become: yes
+      apt_repository:
+        repo: deb [arch=amd64] https://download.docker.com/linux/ubuntu focal stable
+        state: present
+      tags: packages
+
+    - name: Add docker gpg key
+      become: yes
+      apt_key:
+        url: https://download.docker.com/linux/ubuntu/gpg
+        state: present
+      tags: packages
+
     - name: Install packages
       become: yes
       apt:
