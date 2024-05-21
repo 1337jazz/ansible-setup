@@ -79,4 +79,5 @@
 
     - name: Set zsh as default shell
       shell: "chsh -s $(which zsh)"
+      become_user: "{{ user }}"
       tags: zsh
