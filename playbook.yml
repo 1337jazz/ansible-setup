@@ -47,9 +47,25 @@
           - dotnet-runtime-7.0
           - dotnet-runtime-8.0
           - arandr
+          - alacritty
+          - firefox
+          - pavucontrol
+          - brightnessctl
+          - gcc
+          - plocate
+          - xclip
+          - flameshot
+          - docker
+          - redshift
         state: present
       tags: packages
 
+    - name: Install snaps
+      become: yes
+      snap:
+        name:
+          - 1password
+      
     - name: Start ssh service
       become: yes
       service:
@@ -139,3 +155,11 @@
       shell: sh -c "$(curl -fsSL https://install.ohmyz.sh/)"
       when: not oh_my_zsh.stat.exists
       tags: zsh
+
+    - name: Start bluetooth service
+      become: yes
+      service:
+        name: bluetooth
+        state: started
+        enabled: yes
+      tags: bluetooth
