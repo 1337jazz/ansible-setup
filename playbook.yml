@@ -82,6 +82,7 @@
           - simplescreenrecorder
           - chromium-browser
           - atool
+          - make
         state: present
       tags: packages
 
