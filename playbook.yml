@@ -87,6 +87,7 @@
     - name: Check if oh-my-zsh is installed
       stat:
         path: "/home/{{ user }}/.oh-my-zsh"
+      register: oh_my_zsh
       tags: test
 
       register: oh_my_zsh
