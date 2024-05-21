@@ -88,10 +88,10 @@
       stat:
         path: "/home/{{ user }}/.oh-my-zsh"
       register: oh_my_zsh
-      tags: test
+      tags: zsh
 
       register: oh_my_zsh
     - name: Install oh-my-zsh
       shell: sh -c "$(curl -fsSL https://install.ohmyz.sh/)"
-      when: oh_my_zsh.stat.exists == False
+      when: not oh_my_zsh.stat.exists
       tags: zsh
