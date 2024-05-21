@@ -9,6 +9,7 @@
       private: yes
   vars:
     ansible_become_pass: "{{ sudo_password }}"
+    user: "{{ ansible_env.USER }}"
   tasks:
     - name: Install packages
       become: yes
@@ -30,17 +31,18 @@
         enabled: yes
 
     - name: Create .ssh directory
+      become: yes
       file:
-        path: "/home/{{ ansible_env.USER }}"
+        path: "/home/{{ user }}"
         state: directory
-        owner: "{{ ansible_env.USER }}"
-        group: "{{ ansible_env.USER }}"
+        owner: "{{ user }}"
+        group: "{{ user }}"
         mode: "0600"
 
     # - name: Copy encrypted ssh keys
     #   copy:
     #     src: "encrypted/ssh/id_ed25519"
-    #     dest: "/home/{{ ansible_env.USER }}/.ssh/id_ed25519"
+    #     dest: "/home/{{ user }}/.ssh/id_ed25519"
         
     - name: Create temporary vault password file
       copy:
@@ -49,7 +51,7 @@
         mode: "0600"
 
     - name: Decrypt the private key
-      shell: "ansible-vault decrypt /home/{{ ansible_env.USER }}/.ssh/id_ed25519 --vault-password-file=/tmp/vault_pass.txt --output=/home/{{ ansible_env.USER }}/.ssh/id_ed25519"
+      shell: "ansible-vault decrypt /home/{{ user }}/.ssh/id_ed25519 --vault-password-file=/tmp/vault_pass.txt --output=/home/{{ ansible_env.USER }}/.ssh/id_ed25519"
       vars:
         vault_pass_file: "/tmp/vault_pass.txt"
       environment:
@@ -65,4 +67,4 @@
     - name: Copy public ssh key
       copy:
         src: "public/ssh/id_ed25519.pub"
-        dest: "/home/{{ ansible_env.USER }}/.ssh/id_ed25519.pub"
+        dest: "/home/{{ user }}/.ssh/id_ed25519.pub"
