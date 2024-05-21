@@ -78,6 +78,6 @@
       shell: "cd /home/{{ user }}/dotfiles && stow ."
 
     - name: Set zsh as default shell
+      become: yes
       shell: "chsh -s $(which zsh)"
-      become_user: "{{ user }}"
       tags: zsh
