@@ -193,9 +193,12 @@
       tags: zsh
     
     - name: Ensure the font directory exists
+      become: yes
       file:
         path: /usr/local/share/fonts/nerd-fonts
         state: directory
+        owner: "{{ user }}"
+        group: "{{ user }}"
         mode: '0755'
       tags: fonts
 
