@@ -178,7 +178,7 @@
       tags: dotfiles
 
     - name: Set zsh as default shell
-      shell: "sudo chsh -s $(which zsh)"
+      shell: "chsh -s $(which zsh) {{ user }}"
       tags: zsh
 
     - name: Check if oh-my-zsh is installed
