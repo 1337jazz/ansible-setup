@@ -24,6 +24,10 @@
           - zsh
           - curl
           - clang
+          - dotnet-sdk-7.0
+          - dotnet-sdk-8.0
+          - dotnet-runtime-7.0
+          - dotnet-runtime-8.0
         state: present
       tags: packages
 
