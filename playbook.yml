@@ -42,11 +42,11 @@
     - name: Copy encrypted ssh keys
       shell: "cat encrypted/ssh/id_ed25519 > /home/{{ user }}/.ssh/id_ed25519"
         
-    # - name: Create temporary vault password file
-    #   copy:
-    #     content: "{{ vault_password }}"
-    #     dest: /tmp/vault_pass.txt
-    #     mode: "0600"
+    - name: Create temporary vault password file
+      copy:
+        content: "{{ vault_password }}"
+        dest: /tmp/vault_pass.txt
+        mode: "0600"
     #
     # - name: Decrypt the private key
     #   shell: "ansible-vault decrypt /home/{{ user }}/.ssh/id_ed25519 --vault-password-file=/tmp/vault_pass.txt"
