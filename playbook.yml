@@ -174,7 +174,7 @@
 
     - name: Stow dotfiles
       shell: "cd /home/{{ user }}/dotfiles && stow ."
-      when: not dotfiles.stat.exists
+      # when: not dotfiles.stat.exists
       tags: dotfiles
 
     - name: Remove default .zshrc
