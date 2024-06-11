@@ -8,3 +8,9 @@ Use ansible to run the playbook. The playbook will install all the packages and 
 ```bash
 ansible-playbook install.yml
 ```
+
+## Manual steps
+Set the origin url for the git repo to use ssh instead of https so authorised users can push to the repo.
+```bash
+git remote set-url origin git@github.com:1337jazz/ansible-setup.git 
+```
