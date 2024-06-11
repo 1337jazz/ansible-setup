@@ -87,6 +87,7 @@
           - nmap
           - htop
           - acpi
+          - trash-cli
         state: present
       tags: packages
 
@@ -290,3 +291,16 @@
         localectl set-locale LC_IDENTIFICATION=en_GB.UTF-8
       tags: locale
 
+    - name: Update X11 files
+      become: yes
+      copy:
+        src: "/home/{{ user }}/dotfiles/X11/40-libinput.conf"
+        dest: "/etc/X11/xorg.conf.d/40-monitor.conf"
+      tags: X11
+
+    - name: Update X11 files
+      become: yes
+      copy:
+        src: "/home/{{ user }}/dotfiles/X11/10-monitor.conf"
+        dest: "/etc/X11/xorg.conf.d/10-monitor.conf"
+      tags: X11
