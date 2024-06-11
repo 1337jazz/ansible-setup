@@ -88,6 +88,7 @@
           - htop
           - acpi
           - trash-cli
+          - sddm-theme-breeze
         state: present
       tags: packages
 
@@ -317,10 +318,9 @@
         dest: "/etc/X11/xorg.conf.d/10-monitor.conf"
       tags: X11
 
-    - name: Install CDM
+    - name: Update sddm.conf
       become: yes
-      stat:
-        path: /usr/bin/cdm
-      register: cdm
-      tags: cdm
-
+      copy:
+        src: "/home/{{ user }}/dotfiles/sddm/sddm.conf"
+        dest: "/etc/sddm.conf"
+      tags: sddm
