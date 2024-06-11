@@ -108,6 +108,18 @@
           - node
       tags: snaps
 
+    # - name: Install snaps (beta)
+    #   stat:
+    #     path: /snap/bin/zig
+    #   register: zig
+    #   tags: snaps
+
+    - name: Install snaps (beta)
+      become: yes
+      shell: "snap install zig --beta --classic"
+      tags: snaps
+      when: not zig.stat.exists
+
     - name: Check nordvpn exists
       stat:
         path: /usr/bin/nordvpn
@@ -304,3 +316,11 @@
         src: "/home/{{ user }}/dotfiles/X11/10-monitor.conf"
         dest: "/etc/X11/xorg.conf.d/10-monitor.conf"
       tags: X11
+
+    - name: Install CDM
+      become: yes
+      stat:
+        path: /usr/bin/cdm
+      register: cdm
+      tags: cdm
+
