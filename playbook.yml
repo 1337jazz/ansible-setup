@@ -89,6 +89,7 @@
           - acpi
           - trash-cli
           - sddm-theme-breeze
+          - guitarix
         state: present
       tags: packages
 
