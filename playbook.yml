@@ -90,6 +90,7 @@
           - trash-cli
           - sddm-theme-breeze
           - guitarix
+          - qbittorrent
         state: present
       tags: packages
 
