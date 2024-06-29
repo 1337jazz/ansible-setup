@@ -91,6 +91,8 @@
           - sddm-theme-breeze
           - guitarix
           - qbittorrent
+          - lutris
+          - translate-shell
         state: present
       tags: packages
 
