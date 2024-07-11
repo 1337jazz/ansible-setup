@@ -102,6 +102,7 @@
         name:
           - 1password
           - slack
+          - insomnia
       tags: snaps
 
     - name: Install snaps (classic)
@@ -119,11 +120,11 @@
     #   register: zig
     #   tags: snaps
 
-    - name: Install snaps (beta)
-      become: yes
-      shell: "snap install zig --beta --classic"
-      tags: snaps
-      when: not zig.stat.exists
+    # - name: Install snaps (beta)
+    #   become: yes
+    #   shell: "snap install zig --beta --classic"
+    #   tags: snaps
+    #   when: not zig.stat.exists
 
     - name: Check nordvpn exists
       stat:
