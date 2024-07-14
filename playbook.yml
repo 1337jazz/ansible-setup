@@ -96,6 +96,7 @@
           - libasound2-dev
           - libgl1-mesa-dev 
           - xorg-dev
+          - pkg-config
         state: present
       tags: packages
 
