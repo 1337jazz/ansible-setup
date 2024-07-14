@@ -95,6 +95,7 @@
           - translate-shell
           - libasound2-dev
           - libgl1-mesa-dev 
+          - xorg-dev
         state: present
       tags: packages
 
