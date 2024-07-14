@@ -93,6 +93,8 @@
           - qbittorrent
           - lutris
           - translate-shell
+          - libasound2-dev
+          - libgl1-mesa-dev 
         state: present
       tags: packages
 
