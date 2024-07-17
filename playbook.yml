@@ -97,6 +97,8 @@
           - libgl1-mesa-dev 
           - xorg-dev
           - pkg-config
+          - qemu-user
+          - gcc-arm-linux-gnueabihf
         state: present
       tags: packages
 
