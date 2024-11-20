@@ -120,6 +120,14 @@
           - node
       tags: snaps
 
+    - name: Remove unecessary packages
+      become: yes
+      apt:
+        name:
+          - modemmanager
+        state: absent
+      tags: packages
+
     # - name: Install snaps (beta)
     #   stat:
     #     path: /snap/bin/zig
