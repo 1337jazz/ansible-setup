@@ -99,6 +99,7 @@
           - pkg-config
           - qemu-user
           - gcc-arm-linux-gnueabihf
+          - lxappearance
         state: present
       tags: packages
 
