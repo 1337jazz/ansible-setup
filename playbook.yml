@@ -344,3 +344,8 @@
         src: "/home/{{ user }}/dotfiles/sddm/sddm.conf"
         dest: "/etc/sddm.conf"
       tags: sddm
+
+    - name: Set firefox as default browser
+      become: no
+      shell: "xdg-settings set default-web-browser firefox.desktop"
+      tags: firefox
