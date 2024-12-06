@@ -100,6 +100,7 @@
           - qemu-user
           - gcc-arm-linux-gnueabihf
           - lxappearance
+          - picom
         state: present
       tags: packages
 
