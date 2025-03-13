@@ -101,6 +101,7 @@
           - gcc-arm-linux-gnueabihf
           - lxappearance
           - picom
+          - kolourpaint
         state: present
       tags: packages
 
