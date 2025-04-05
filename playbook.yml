@@ -102,6 +102,7 @@
           - lxappearance
           - picom
           - kolourpaint
+          - xdotool
         state: present
       tags: packages
 
