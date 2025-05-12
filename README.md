@@ -14,3 +14,26 @@ Set the origin url for the git repo to use ssh instead of https so authorised us
 ```bash
 git remote set-url origin git@github.com:1337jazz/ansible-setup.git 
 ```
+
+# Removed snaps 
+Avoided adding snaps, so this code is commented, install these manually
+TODO: Automate install
+TODO: Automate remove snap completely
+
+# - name: Install snaps
+#   become: yes
+#   snap:
+#     name:
+#       - 1password
+#       - slack
+#       - insomnia
+#   tags: snaps
+
+# - name: Install snaps (classic)
+#   become: yes
+#   snap:
+#     classic: yes
+#     name: 
+#       - go
+#       - node
+#   tags: snaps

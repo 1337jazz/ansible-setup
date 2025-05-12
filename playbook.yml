@@ -103,26 +103,28 @@
           - picom
           - kolourpaint
           - xdotool
+          - steam 
+          - cpufrequtils 
         state: present
       tags: packages
 
-    - name: Install snaps
-      become: yes
-      snap:
-        name:
-          - 1password
-          - slack
-          - insomnia
-      tags: snaps
+    # - name: Install snaps
+    #   become: yes
+    #   snap:
+    #     name:
+    #       - 1password
+    #       - slack
+    #       - insomnia
+    #   tags: snaps
 
-    - name: Install snaps (classic)
-      become: yes
-      snap:
-        classic: yes
-        name: 
-          - go
-          - node
-      tags: snaps
+    # - name: Install snaps (classic)
+    #   become: yes
+    #   snap:
+    #     classic: yes
+    #     name: 
+    #       - go
+    #       - node
+    #   tags: snaps
 
     - name: Remove unecessary packages
       become: yes
